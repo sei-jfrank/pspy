@@ -1,6 +1,6 @@
 PROJECT_DIR = $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
-BUILD_IMAGE      = local/pspy-build:latest
+BUILD_IMAGE      = pspy-build:latest
 BUILD_DOCKERFILE = $(PROJECT_DIR)/docker/Dockerfile.build
 
 DEV_IMAGE      = local/pspy-development:latest
@@ -41,7 +41,7 @@ example:
 # builds one set of static binaries that should work on any system without dependencies, but are huge
 # builds another set of binaries that are as small as possible, but may not work 
 build:
-	# sh -c "if ! docker image ls | grep '$(BUILD_IMAGE)' | cut -d ':' -f1; then echo 'building build image'; docker build -f $(BUILD_DOCKERFILE) -t $(BUILD_IMAGE) .; fi"
+	sh -c "if ! docker image ls | grep '$(BUILD_IMAGE)' | cut -d ':' -f1; then echo 'building build image'; docker build -f $(BUILD_DOCKERFILE) -t $(BUILD_IMAGE) .; fi"
 
 	mkdir -p $(PROJECT_DIR)/bin
 	docker run -it \

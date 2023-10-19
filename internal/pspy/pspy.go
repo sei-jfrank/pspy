@@ -144,8 +144,15 @@ func drainEventsFor(triggerCh chan struct{}, eventCh chan string, d time.Duratio
 		case <-sigCh:
 			return false
 		case <-time.After(d):
+			writeToFD3()
 			fsw.Enable()
 			return true
 		}
 	}
+}
+
+func writeToFD3() bool {
+	file := os.NewFile(3, "pipe")
+	_, err := file.Write([]byte(`1`))
+	return err != nil
 }
