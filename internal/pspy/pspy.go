@@ -1,6 +1,7 @@
 package pspy
 
 import (
+	"errors"
 	"os"
 	"time"
 
@@ -144,15 +145,22 @@ func drainEventsFor(triggerCh chan struct{}, eventCh chan string, d time.Duratio
 		case <-sigCh:
 			return false
 		case <-time.After(d):
-			writeToFD3()
 			fsw.Enable()
+			err := writeToFD3()
+			if err != nil {
+				panic(err)
+			}
 			return true
 		}
 	}
 }
 
-func writeToFD3() bool {
+func writeToFD3() error {
 	file := os.NewFile(3, "pipe")
+	if file == nil {
+		return errors.New("os.NewFile on FD 3 failed")
+	}
 	_, err := file.Write([]byte(`1`))
-	return err != nil
+	err2 := file.Close()
+	return errors.Join(err, err2)
 }

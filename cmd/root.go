@@ -16,20 +16,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var banner = `
-
-     ██▓███    ██████  ██▓███ ▓██   ██▓
-    ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒
-    ▓██░ ██▓▒░ ▓██▄   ▓██░ ██▓▒ ▒██ ██░
-    ▒██▄█▓▒ ▒  ▒   ██▒▒██▄█▓▒ ▒ ░ ▐██▓░
-    ▒██▒ ░  ░▒██████▒▒▒██▒ ░  ░ ░ ██▒▓░
-    ▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░  ██▒▒▒ 
-    ░▒ ░     ░ ░▒  ░ ░░▒ ░     ▓██ ░▒░ 
-    ░░       ░  ░  ░  ░░       ▒ ▒ ░░  
-                   ░           ░ ░     
-                               ░ ░     
-
-`
+var banner = ``
 
 var helpText = `
 pspy monitors the system for file system events and new processes.
